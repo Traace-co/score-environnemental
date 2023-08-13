@@ -1,0 +1,15 @@
+{
+  "short_name": "Score environnemental des voitures électriques",
+  "name": "Score environnemental des voitures électriques : simulateur de la méthodologie proposée par l'Ademe",
+  "icons": [
+    {
+      "src": "favicon-32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
