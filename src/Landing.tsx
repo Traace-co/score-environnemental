@@ -56,12 +56,23 @@ export function Landing() {
 
     const isMobile = useIsMobile()
 
+    const mediumSedan: CarProperties = {
+        totalMassAluminiumKg: 130,
+        totalMassSteelKg: 780,
+        totalMassWithoutBatteryKg: 1300,
+        totalMassOtherThanSteelOrAluminiumKg: 80,
+        massWithoutDriverKg: 1650,
+        batteryCapacityKWh: 55,
+        chemistry: BatteryChemistry.LFP_Graphite,
+        isLargeCar: true,
+    }
+
     const mediumSUV: CarProperties = {
         totalMassAluminiumKg: 150,
         totalMassSteelKg: 800,
         totalMassWithoutBatteryKg: 1500,
         totalMassOtherThanSteelOrAluminiumKg: 100,
-        massWithoutDriverKg: 1800,
+        massWithoutDriverKg: 1900,
         batteryCapacityKWh: 70,
         chemistry: BatteryChemistry.NCA_Graphite,
         isLargeCar: true,
@@ -185,6 +196,24 @@ export function Landing() {
                 transportationSettings: transportationFromFranceToFrance,
                 ...france,
                 ...mediumSUV
+            })
+        },
+        {
+            name: 'Berline moyenne intégralement produite en Chine',
+            emoji: china.emoji,
+            footprintEstimator: new FootprintEstimator({
+                transportationSettings: transportationFromChinaToFrance,
+                ...china,
+                ...mediumSedan
+            })
+        },
+        {
+            name: 'Berline moyenne intégralement produite en France',
+            emoji: france.emoji,
+            footprintEstimator: new FootprintEstimator({
+                transportationSettings: transportationFromFranceToFrance,
+                ...france,
+                ...mediumSedan
             })
         },
         {
