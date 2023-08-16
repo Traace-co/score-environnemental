@@ -7,7 +7,8 @@ export function EnvironmentalScore(props: { footprintEstimator: FootprintEstimat
             <Tooltip title="Score environnemental. Le score minimum nécessaire pour le bonus écologique est fixé à 60. Sa valeur maximum est 80.">
                 <div className="p-2 rounded bg-gray-100">
                     <div className="text-lg font-bold">
-                        🌍 Score : {props.footprintEstimator.getEnvironmentalScore().toFixed(1)}
+                       <span>🌍 Score : {props.footprintEstimator.getEnvironmentalScore().toFixed(1)}</span>
+                       <span className="text-xs"> / 80</span>
                     </div>
                 </div>
             </Tooltip>
