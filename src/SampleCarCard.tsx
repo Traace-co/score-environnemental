@@ -19,6 +19,9 @@ export function SampleCarCard(props: { car: SampleCar, maxTotalFootprint: number
           <div className="font-medium text-lg">
             {`${emoji} ${name}`}
           </div>
+          <div>
+            {`Batterie ${footprintEstimator.chemistry} ${footprintEstimator.batteryCapacityKWh} kWh`}
+          </div>
           <div className="flex flex-row">
             <EnvironmentalScore footprintEstimator={footprintEstimator} />
           </div>

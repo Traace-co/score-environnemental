@@ -74,7 +74,7 @@ export function Landing() {
         totalMassOtherThanSteelOrAluminiumKg: 100,
         massWithoutDriverKg: 1900,
         batteryCapacityKWh: 70,
-        chemistry: BatteryChemistry.NCA_Graphite,
+        chemistry: BatteryChemistry.NMC622_Graphite,
         isLargeCar: true,
     }
 
@@ -85,7 +85,7 @@ export function Landing() {
         totalMassOtherThanSteelOrAluminiumKg: 60,
         massWithoutDriverKg: 1200,
         batteryCapacityKWh: 30,
-        chemistry: BatteryChemistry.NCA_Graphite,
+        chemistry: BatteryChemistry.LFP_Graphite,
         isLargeCar: false,
     }
 

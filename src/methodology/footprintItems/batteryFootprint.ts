@@ -21,13 +21,13 @@ export enum BatteryRegion {
 }
 
 export enum BatteryChemistry {
-  NMC111_Graphite = 'NMC111_Graphite',
-  NMC532_Graphite = 'NMC532_Graphite',
-  NMC622_Graphite = 'NMC622_Graphite',
-  NMC811_Graphite = 'NMC811_Graphite',
-  NCA_Graphite = 'NCA_Graphite',
-  LFP_Graphite = 'LFP_Graphite',
-  Other_Chemistry = 'Other_Chemistry'
+  NMC111_Graphite = 'NMC111 Graphite',
+  NMC532_Graphite = 'NMC532 Graphite',
+  NMC622_Graphite = 'NMC622 Graphite',
+  NMC811_Graphite = 'NMC811 Graphite',
+  NCA_Graphite = 'NCA',
+  LFP_Graphite = 'LFP',
+  Other_Chemistry = 'Autre chimie'
 }
 
 export function batteryChemistryName(batteryChemistry: BatteryChemistry) {
