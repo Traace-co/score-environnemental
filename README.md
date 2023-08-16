@@ -23,4 +23,4 @@ Traace développe une plateforme permettant aux entreprises de se décarboner pl
 
 ## Puis-je contribuer ?
 
-Bien sûr ! Ce simulateur a vocation à être enrichi, en particulier en ce qui concerne les hypothèses prises en compte dans le calcul des distances parcourues ou bien la réparitition des métaux utilisés.
+Bien sûr ! Ce simulateur a vocation à être enrichi, en particulier en ce qui concerne les hypothèses prises en compte dans le calcul des distances parcourues ou bien la répartition des métaux utilisés.
