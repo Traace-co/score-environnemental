@@ -56,6 +56,28 @@ export function Landing() {
 
     const isMobile = useIsMobile()
 
+    const mediumSUV: CarProperties = {
+        totalMassAluminiumKg: 150,
+        totalMassSteelKg: 800,
+        totalMassWithoutBatteryKg: 1500,
+        totalMassOtherThanSteelOrAluminiumKg: 100,
+        massWithoutDriverKg: 1800,
+        batteryCapacityKWh: 70,
+        chemistry: BatteryChemistry.NCA_Graphite,
+        isLargeCar: true,
+    }
+
+    const smallCar: CarProperties = {
+        totalMassAluminiumKg: 100,
+        totalMassSteelKg: 500,
+        totalMassWithoutBatteryKg: 1200,
+        totalMassOtherThanSteelOrAluminiumKg: 60,
+        massWithoutDriverKg: 1200,
+        batteryCapacityKWh: 30,
+        chemistry: BatteryChemistry.NCA_Graphite,
+        isLargeCar: false,
+    }
+
     const transportationFromChinaToFrance = [
         {
             mode: TransportationMode.Sea,
@@ -123,66 +145,10 @@ export function Landing() {
         }
     ]
 
-    const [selectedCarName, setSelectedCarName] = useState<string | undefined>(undefined)
-    const [totalMassAluminiumKg, setTotalMassAluminiumKg] = useState(300)
-    const [aluminiumRegion, setAluminiumRegion] = useState(AluminiumRegion.China)
-    const [totalMassSteelKg, setTotalMassSteelKg] = useState(800)
-    const [steelCountry, setSteelCountry] = useState(SteelCountry.Chine)
-    const [totalMassWithoutBatteryKg, setTotalMassWithoutBatteryKg] = useState(1500)
-    const [totalMassOtherThanSteelOrAluminiumKg, setTotalMassOtherThanSteelOrAluminiumKg] = useState(100)
-    const [otherMetalsRegion, setOtherMetalsRegion] = useState(OtherMetalsRegion.Others)
-    const [massWithoutDriverKg, setMassWithoutDriverKg] = useState(1800)
-    const [productionCountry, setProductionCountry] = useState(ProductionCountry.Chine)
-    const [batteryCapacityKWh, setBatteryCapacityKWh] = useState(50)
-    const [batteryRegion, setBatteryRegion] = useState(BatteryRegion.China)
-    const [chemistry, setChemistry] = useState(BatteryChemistry.LFP_Graphite)
-    const [isLargeCar, setIsLargeCar] = useState(true)
-    const [transportationSettings, setTransportationSettings] = useState(transportationFromChinaToFrance)
-
-    const footprintEstimator = new FootprintEstimator({
-        totalMassAluminiumKg,
-        aluminiumRegion,
-        totalMassSteelKg,
-        steelCountry,
-        totalMassWithoutBatteryKg,
-        totalMassOtherThanSteelOrAluminiumKg,
-        massWithoutDriverKg,
-        productionCountry,
-        batteryCapacityKWh,
-        batteryRegion,
-        chemistry,
-        otherMetalsRegion,
-        transportationSettings,
-        isLargeCar
-    })
-
     const china = allEnvironmentalScoreCountries.find(country => country.id === 'cn')!
     const france = allEnvironmentalScoreCountries.find(country => country.id === 'fr')!
     const germany = allEnvironmentalScoreCountries.find(country => country.id === 'de')!
     const southKorea = allEnvironmentalScoreCountries.find(country => country.id === 'kr')!
-
-    const mediumSUV: CarProperties = {
-        totalMassAluminiumKg: 150,
-        totalMassSteelKg: 800,
-        totalMassWithoutBatteryKg: 1500,
-        totalMassOtherThanSteelOrAluminiumKg: 100,
-        massWithoutDriverKg: 1800,
-        batteryCapacityKWh: 70,
-        chemistry: BatteryChemistry.NCA_Graphite,
-        isLargeCar: true,
-    }
-
-    const smallCar: CarProperties = {
-        totalMassAluminiumKg: 100,
-        totalMassSteelKg: 500,
-        totalMassWithoutBatteryKg: 1200,
-        totalMassOtherThanSteelOrAluminiumKg: 60,
-        massWithoutDriverKg: 1200,
-        batteryCapacityKWh: 30,
-        chemistry: BatteryChemistry.NCA_Graphite,
-        isLargeCar: false,
-    }
-
 
     const sampleCars: SampleCar[] = [
         {
@@ -249,6 +215,41 @@ export function Landing() {
             })
         }
     ]
+
+    const defaultSampleCar = sampleCars[0]
+
+    const [selectedCarName, setSelectedCarName] = useState<string | undefined>(defaultSampleCar.name)
+    const [totalMassAluminiumKg, setTotalMassAluminiumKg] = useState(defaultSampleCar.footprintEstimator.totalMassAluminiumKg)
+    const [aluminiumRegion, setAluminiumRegion] = useState(defaultSampleCar.footprintEstimator.aluminiumRegion)
+    const [totalMassSteelKg, setTotalMassSteelKg] = useState(defaultSampleCar.footprintEstimator.totalMassSteelKg)
+    const [steelCountry, setSteelCountry] = useState(defaultSampleCar.footprintEstimator.steelCountry)
+    const [totalMassWithoutBatteryKg, setTotalMassWithoutBatteryKg] = useState(defaultSampleCar.footprintEstimator.totalMassWithoutBatteryKg)
+    const [totalMassOtherThanSteelOrAluminiumKg, setTotalMassOtherThanSteelOrAluminiumKg] = useState(defaultSampleCar.footprintEstimator.totalMassOtherThanSteelOrAluminiumKg)
+    const [otherMetalsRegion, setOtherMetalsRegion] = useState(defaultSampleCar.footprintEstimator.otherMetalsRegion)
+    const [massWithoutDriverKg, setMassWithoutDriverKg] = useState(defaultSampleCar.footprintEstimator.massWithoutDriverKg)
+    const [productionCountry, setProductionCountry] = useState(defaultSampleCar.footprintEstimator.productionCountry)
+    const [batteryCapacityKWh, setBatteryCapacityKWh] = useState(defaultSampleCar.footprintEstimator.batteryCapacityKWh)
+    const [batteryRegion, setBatteryRegion] = useState(defaultSampleCar.footprintEstimator.batteryRegion)
+    const [chemistry, setChemistry] = useState(defaultSampleCar.footprintEstimator.chemistry)
+    const [isLargeCar, setIsLargeCar] = useState(defaultSampleCar.footprintEstimator.isLargeCar)
+    const [transportationSettings, setTransportationSettings] = useState(defaultSampleCar.footprintEstimator.transportationSettings)
+
+    const footprintEstimator = new FootprintEstimator({
+        totalMassAluminiumKg,
+        aluminiumRegion,
+        totalMassSteelKg,
+        steelCountry,
+        totalMassWithoutBatteryKg,
+        totalMassOtherThanSteelOrAluminiumKg,
+        massWithoutDriverKg,
+        productionCountry,
+        batteryCapacityKWh,
+        batteryRegion,
+        chemistry,
+        otherMetalsRegion,
+        transportationSettings,
+        isLargeCar
+    })
 
     function replaceSimulationWithSampleCar(car: SampleCar) {
         setTotalMassAluminiumKg(car.footprintEstimator.totalMassAluminiumKg)
