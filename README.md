@@ -10,6 +10,12 @@
     
   C'est ce modèle que nous vous proposons d'explorer ici, à travers des exemples et une simulation entièrement personnalisable.
 
+## Comment accéder au simulateur ?
+
+  Le simulateur est accessible à l'adresse suivante : https://traace-co.github.io/score-environnemental/
+
+  Il est automatiquement mise à jour à chaque modification du code source.
+
 ## Qui a créé cet outil ?
 
 Ce simulateur a été créé par l'équipe de [Traace](https://traace.co).
