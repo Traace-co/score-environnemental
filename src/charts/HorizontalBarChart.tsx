@@ -10,8 +10,6 @@ export function HorizontalBarChart(props: {
 
   const isMobile = useIsMobile()
 
-  console.log('isMobile', isMobile)
-
   const options = {
     indexAxis: 'y' as const,
     elements: {
