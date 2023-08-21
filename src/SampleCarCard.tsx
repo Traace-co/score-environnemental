@@ -15,7 +15,7 @@ export function SampleCarCard(props: { car: SampleCar, maxTotalFootprint: number
   const { footprintEstimator, name, emoji } = car
   return (
     <div className="flex flex-wrap p-4 border rounded">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 md:w-64">
           <div className="font-medium text-lg">
             {`${emoji} ${name}`}
           </div>

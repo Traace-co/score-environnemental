@@ -17,7 +17,7 @@ export function HorizontalBarChart(props: {
         borderWidth: 0,
       },
     },
-    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: {
         stacked: true,
@@ -54,8 +54,8 @@ export function HorizontalBarChart(props: {
       )
   }
   return (
-    <div className="w-full">
-      <Bar height={isMobile ? 100 : 50} options={options} data={data} />
+    <div className="w-full relative">
+      <Bar height={isMobile ? 100 : 200} options={options} data={data} />
     </div>
   )
 }
