@@ -1,9 +1,9 @@
 import { environmentalScore } from "./environmentalScore"
 import { AluminiumRegion, aluminiumFootprint } from "./footprintItems/aluminiumFootprint"
 import { BatteryChemistry, BatteryRegion, batteryFootprint } from "./footprintItems/batteryFootprint"
-import { OtherMetalsRegion, otherMetalsFootprint } from "./footprintItems/otherMetalsFootprint"
-import { ProductionCountry, productionFootprint } from "./footprintItems/productionFootprint"
-import { SteelCountry, steelFootprint } from "./footprintItems/steelFootprint"
+import { FerrousMetalsCountry, ferrousMetalsFootprint } from "./footprintItems/ferrousMetalsFootprint"
+import { ManufacturingCountry, manufacturingFootprint } from "./footprintItems/manufacturingFootprint"
+import { OtherMaterialsRegion, otherMaterialsFootprint } from "./footprintItems/otherMaterialsFootprint"
 import { TransportationSettings, transportationFootprint } from "./footprintItems/transportationFootprint"
 
 export interface ChartData {
@@ -16,13 +16,13 @@ export interface ChartData {
 export class FootprintEstimator {
   totalMassAluminiumKg: number
   aluminiumRegion: AluminiumRegion
-  totalMassSteelKg: number
-  steelCountry: SteelCountry
+  totalMassFerrousMetalsKg: number
+  ferrousMetalsCountry: FerrousMetalsCountry
   totalMassWithoutBatteryKg: number
-  totalMassOtherThanSteelOrAluminiumKg: number
-  otherMetalsRegion: OtherMetalsRegion
+  totalMassOtherThanFerrousMetalsOrAluminiumKg: number
+  otherMaterialsRegion: OtherMaterialsRegion
   massWithoutDriverKg: number
-  productionCountry: ProductionCountry
+  manufacturingCountry: ManufacturingCountry
   batteryCapacityKWh: number
   batteryRegion: BatteryRegion
   chemistry: BatteryChemistry
@@ -32,12 +32,12 @@ export class FootprintEstimator {
   constructor(params: {
     totalMassAluminiumKg: number,
     aluminiumRegion: AluminiumRegion,
-    totalMassSteelKg: number,
-    steelCountry: SteelCountry,
+    totalMassFerrousMetalsKg: number,
+    ferrousMetalsCountry: FerrousMetalsCountry,
     totalMassWithoutBatteryKg: number,
-    productionCountry: ProductionCountry,
-    totalMassOtherThanSteelOrAluminiumKg: number,
-    otherMetalsRegion: OtherMetalsRegion,
+    manufacturingCountry: ManufacturingCountry,
+    totalMassOtherThanFerrousMetalsOrAluminiumKg: number,
+    otherMaterialsRegion: OtherMaterialsRegion,
     massWithoutDriverKg: number,
     batteryCapacityKWh: number,
     batteryRegion: BatteryRegion,
@@ -48,18 +48,18 @@ export class FootprintEstimator {
   ) {
     this.totalMassAluminiumKg = params.totalMassAluminiumKg
     this.aluminiumRegion = params.aluminiumRegion
-    this.totalMassSteelKg = params.totalMassSteelKg
-    this.steelCountry = params.steelCountry
+    this.totalMassFerrousMetalsKg = params.totalMassFerrousMetalsKg
+    this.ferrousMetalsCountry = params.ferrousMetalsCountry
     this.totalMassWithoutBatteryKg = params.totalMassWithoutBatteryKg
-    this.totalMassOtherThanSteelOrAluminiumKg = params.totalMassOtherThanSteelOrAluminiumKg
+    this.totalMassOtherThanFerrousMetalsOrAluminiumKg = params.totalMassOtherThanFerrousMetalsOrAluminiumKg
     this.massWithoutDriverKg = params.massWithoutDriverKg
     this.batteryCapacityKWh = params.batteryCapacityKWh
     this.batteryRegion = params.batteryRegion
     this.chemistry = params.chemistry
     this.transportationSettings = params.transportationSettings
     this.isLargeCar = params.isLargeCar
-    this.productionCountry = params.productionCountry;
-    this.otherMetalsRegion = params.otherMetalsRegion;
+    this.manufacturingCountry = params.manufacturingCountry;
+    this.otherMaterialsRegion = params.otherMaterialsRegion;
   }
 
   public getAluminiumFootprint(): number {
@@ -69,24 +69,24 @@ export class FootprintEstimator {
     })
   }
 
-  public getSteelFootprint(): number {
-    return steelFootprint({
-      totalMassSteelKg: this.totalMassSteelKg,
-      country: this.steelCountry
+  public getFerrousMetalsFootprint(): number {
+    return ferrousMetalsFootprint({
+      totalMassFerrousMetalsKg: this.totalMassFerrousMetalsKg,
+      country: this.ferrousMetalsCountry
     })
   }
 
-  public getProductionFootprint(): number {
-    return productionFootprint({
+  public getManufacturingFootprint(): number {
+    return manufacturingFootprint({
       totalMassWithoutBatteryKg: this.totalMassWithoutBatteryKg,
-      country: this.productionCountry
+      country: this.manufacturingCountry
     })
   }
 
-  public getOtherMetalsFootprint(): number {
-    return otherMetalsFootprint({
-      totalMassOtherThanSteelOrAluminiumKg: this.totalMassOtherThanSteelOrAluminiumKg,
-      region: this.otherMetalsRegion
+  public getOtherMaterialsFootprint(): number {
+    return otherMaterialsFootprint({
+      totalMassOtherThanFerrousMetalsOrAluminiumKg: this.totalMassOtherThanFerrousMetalsOrAluminiumKg,
+      region: this.otherMaterialsRegion
     })
   }
 
@@ -107,9 +107,9 @@ export class FootprintEstimator {
 
   public getTotalFootprint(): number {
     return this.getAluminiumFootprint()
-      + this.getSteelFootprint()
-      + this.getProductionFootprint()
-      + this.getOtherMetalsFootprint()
+      + this.getFerrousMetalsFootprint()
+      + this.getManufacturingFootprint()
+      + this.getOtherMaterialsFootprint()
       + this.getBatteryFootprint()
       + this.getTransportationFootprint()
   }
@@ -134,20 +134,20 @@ export class FootprintEstimator {
         borderColor: 'rgba(255, 99, 132, 1)'
       },
       {
-        label: 'Acier',
-        data: this.getSteelFootprint(),
+        label: 'Métaux ferreux',
+        data: this.getFerrousMetalsFootprint(),
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: 'rgba(54, 162, 235, 1)'
       },
       {
-        label: 'Production',
-        data: this.getProductionFootprint(),
+        label: 'Transformations et assemblage',
+        data: this.getManufacturingFootprint(),
         backgroundColor: 'rgba(255, 206, 86, 0.2)',
         borderColor: 'rgba(255, 206, 86, 1)'
       },
       {
-        label: 'Autres métaux',
-        data: this.getOtherMetalsFootprint(),
+        label: 'Autres matériaux',
+        data: this.getOtherMaterialsFootprint(),
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)'
       },

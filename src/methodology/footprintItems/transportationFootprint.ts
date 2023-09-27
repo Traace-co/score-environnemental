@@ -39,7 +39,7 @@ function transportationEmissionFactorKgCO2ePerTonKm(params: { region: Transporta
     case TransportationMode.Sea:
       return 0.101
     case TransportationMode.River:
-      return 0.066
+      return 0.010
     case TransportationMode.Air:
       return 1.21
     case TransportationMode.Road:
@@ -62,8 +62,6 @@ function transportationEmissionFactorKgCO2ePerTonKm(params: { region: Transporta
       switch (region) {
         case TransportationRegion.Africa:
           return 0.045
-        case TransportationRegion.America:
-          return 0.038
         case TransportationRegion.Asia:
           return 0.041
         case TransportationRegion.Europe_Without_France:

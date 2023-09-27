@@ -1,18 +1,18 @@
 import { AluminiumRegion } from "./footprintItems/aluminiumFootprint"
 import { BatteryRegion } from "./footprintItems/batteryFootprint"
-import { OtherMetalsRegion } from "./footprintItems/otherMetalsFootprint"
-import { ProductionCountry } from "./footprintItems/productionFootprint"
-import { SteelCountry } from "./footprintItems/steelFootprint"
+import { FerrousMetalsCountry } from "./footprintItems/ferrousMetalsFootprint"
+import { ManufacturingCountry } from "./footprintItems/manufacturingFootprint"
+import { OtherMaterialsRegion } from "./footprintItems/otherMaterialsFootprint"
 import { TransportationRegion } from "./footprintItems/transportationFootprint"
 
 export interface EnvironmentalScoreCountry {
   id: string
   name: string
   emoji: string,
-  steelCountry: SteelCountry
+  ferrousMetalsCountry: FerrousMetalsCountry
   aluminiumRegion: AluminiumRegion
-  productionCountry: ProductionCountry
-  otherMetalsRegion: OtherMetalsRegion
+  manufacturingCountry: ManufacturingCountry
+  otherMaterialsRegion: OtherMaterialsRegion
   transportationRegion: TransportationRegion
   batteryRegion: BatteryRegion
 }
@@ -21,10 +21,10 @@ export const allEnvironmentalScoreCountries: EnvironmentalScoreCountry[] = [
     id: 'us',
     name: 'USA',
     emoji: '🇺🇸',
-    steelCountry: SteelCountry.États_Unis,
+    ferrousMetalsCountry: FerrousMetalsCountry.États_Unis,
     aluminiumRegion: AluminiumRegion.NorthAmerica,
-    productionCountry: ProductionCountry.États_Unis,
-    otherMetalsRegion: OtherMetalsRegion.Others,
+    manufacturingCountry: ManufacturingCountry.États_Unis,
+    otherMaterialsRegion: OtherMaterialsRegion.Others,
     transportationRegion: TransportationRegion.America,
     batteryRegion: BatteryRegion.USA
   },
@@ -32,10 +32,10 @@ export const allEnvironmentalScoreCountries: EnvironmentalScoreCountry[] = [
     id: 'fr',
     name: 'France',
     emoji: '🇫🇷',
-    steelCountry: SteelCountry.France,
+    ferrousMetalsCountry: FerrousMetalsCountry.France,
     aluminiumRegion: AluminiumRegion.Europe,
-    productionCountry: ProductionCountry.France,
-    otherMetalsRegion: OtherMetalsRegion.Europe,
+    manufacturingCountry: ManufacturingCountry.France,
+    otherMaterialsRegion: OtherMaterialsRegion.Europe,
     transportationRegion: TransportationRegion.France,
     batteryRegion: BatteryRegion.Europe
   },
@@ -43,10 +43,10 @@ export const allEnvironmentalScoreCountries: EnvironmentalScoreCountry[] = [
     id: 'de',
     name: 'Germany',
     emoji: '🇩🇪',
-    steelCountry: SteelCountry.Allemagne,
+    ferrousMetalsCountry: FerrousMetalsCountry.Allemagne,
     aluminiumRegion: AluminiumRegion.Europe,
-    productionCountry: ProductionCountry.Allemagne,
-    otherMetalsRegion: OtherMetalsRegion.Europe,
+    manufacturingCountry: ManufacturingCountry.Allemagne,
+    otherMaterialsRegion: OtherMaterialsRegion.Europe,
     transportationRegion: TransportationRegion.Europe_Without_France,
     batteryRegion: BatteryRegion.Europe
   },
@@ -54,10 +54,10 @@ export const allEnvironmentalScoreCountries: EnvironmentalScoreCountry[] = [
     id: 'cn',
     name: 'China',
     emoji: '🇨🇳',
-    steelCountry: SteelCountry.Chine,
+    ferrousMetalsCountry: FerrousMetalsCountry.Chine,
     aluminiumRegion: AluminiumRegion.China,
-    productionCountry: ProductionCountry.Chine,
-    otherMetalsRegion: OtherMetalsRegion.Others,
+    manufacturingCountry: ManufacturingCountry.Chine,
+    otherMaterialsRegion: OtherMaterialsRegion.Others,
     transportationRegion: TransportationRegion.Asia,
     batteryRegion: BatteryRegion.China
   },
@@ -65,10 +65,10 @@ export const allEnvironmentalScoreCountries: EnvironmentalScoreCountry[] = [
     id: 'in',
     name: 'India',
     emoji: '🇮🇳',
-    steelCountry: SteelCountry.Inde,
+    ferrousMetalsCountry: FerrousMetalsCountry.Inde,
     aluminiumRegion: AluminiumRegion.Others,
-    productionCountry: ProductionCountry.Inde,
-    otherMetalsRegion: OtherMetalsRegion.Others,
+    manufacturingCountry: ManufacturingCountry.Inde,
+    otherMaterialsRegion: OtherMaterialsRegion.Others,
     transportationRegion: TransportationRegion.Asia,
     batteryRegion: BatteryRegion.Other
   },
@@ -76,10 +76,10 @@ export const allEnvironmentalScoreCountries: EnvironmentalScoreCountry[] = [
     id: 'kr',
     name: 'South Korea',
     emoji: '🇰🇷',
-    steelCountry: SteelCountry.Corée_du_Sud,
+    ferrousMetalsCountry: FerrousMetalsCountry.Corée_du_Sud,
     aluminiumRegion: AluminiumRegion.Others,
-    productionCountry: ProductionCountry.Corée_du_Sud,
-    otherMetalsRegion: OtherMetalsRegion.Others,
+    manufacturingCountry: ManufacturingCountry.Corée_du_Sud,
+    otherMaterialsRegion: OtherMaterialsRegion.Others,
     transportationRegion: TransportationRegion.Asia,
     batteryRegion: BatteryRegion.SouthKorea
   }

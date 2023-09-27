@@ -10,9 +10,9 @@ import { allEnvironmentalScoreCountries } from "./methodology/environmentalScore
 import { FootprintEstimator } from "./methodology/footprintEstimator";
 import { AluminiumRegion } from "./methodology/footprintItems/aluminiumFootprint";
 import { BatteryChemistry, BatteryRegion, batteryChemistryName } from "./methodology/footprintItems/batteryFootprint";
-import { OtherMetalsRegion } from "./methodology/footprintItems/otherMetalsFootprint";
-import { ProductionCountry } from "./methodology/footprintItems/productionFootprint";
-import { SteelCountry } from "./methodology/footprintItems/steelFootprint";
+import { FerrousMetalsCountry } from "./methodology/footprintItems/ferrousMetalsFootprint";
+import { ManufacturingCountry } from "./methodology/footprintItems/manufacturingFootprint";
+import { OtherMaterialsRegion } from "./methodology/footprintItems/otherMaterialsFootprint";
 import { TransportationMode, TransportationRegion } from "./methodology/footprintItems/transportationFootprint";
 import { Settings } from "./settings/Settings";
 import { SettingsSlider } from "./settings/SettingsSlider";
@@ -42,9 +42,9 @@ function ScoringSummaryItem(props: { title: string, children: ReactNode }) {
 
 interface CarProperties {
     totalMassAluminiumKg: number
-    totalMassSteelKg: number
+    totalMassFerrousMetalsKg: number
     totalMassWithoutBatteryKg: number
-    totalMassOtherThanSteelOrAluminiumKg: number
+    totalMassOtherThanFerrousMetalsOrAluminiumKg: number
     massWithoutDriverKg: number
     batteryCapacityKWh: number
     chemistry: BatteryChemistry
@@ -58,9 +58,9 @@ export function Landing() {
 
     const mediumSedan: CarProperties = {
         totalMassAluminiumKg: 130,
-        totalMassSteelKg: 780,
+        totalMassFerrousMetalsKg: 780,
         totalMassWithoutBatteryKg: 1300,
-        totalMassOtherThanSteelOrAluminiumKg: 80,
+        totalMassOtherThanFerrousMetalsOrAluminiumKg: 80,
         massWithoutDriverKg: 1650,
         batteryCapacityKWh: 55,
         chemistry: BatteryChemistry.LFP_Graphite,
@@ -69,20 +69,20 @@ export function Landing() {
 
     const mediumSUV: CarProperties = {
         totalMassAluminiumKg: 150,
-        totalMassSteelKg: 800,
+        totalMassFerrousMetalsKg: 800,
         totalMassWithoutBatteryKg: 1500,
-        totalMassOtherThanSteelOrAluminiumKg: 100,
+        totalMassOtherThanFerrousMetalsOrAluminiumKg: 100,
         massWithoutDriverKg: 1900,
         batteryCapacityKWh: 70,
-        chemistry: BatteryChemistry.NMC622_Graphite,
+        chemistry: BatteryChemistry.NMC811_Graphite,
         isLargeCar: true,
     }
 
     const smallCar: CarProperties = {
         totalMassAluminiumKg: 100,
-        totalMassSteelKg: 500,
+        totalMassFerrousMetalsKg: 500,
         totalMassWithoutBatteryKg: 1200,
-        totalMassOtherThanSteelOrAluminiumKg: 60,
+        totalMassOtherThanFerrousMetalsOrAluminiumKg: 60,
         massWithoutDriverKg: 1200,
         batteryCapacityKWh: 30,
         chemistry: BatteryChemistry.LFP_Graphite,
@@ -250,13 +250,13 @@ export function Landing() {
     const [selectedCarName, setSelectedCarName] = useState<string | undefined>(defaultSampleCar.name)
     const [totalMassAluminiumKg, setTotalMassAluminiumKg] = useState(defaultSampleCar.footprintEstimator.totalMassAluminiumKg)
     const [aluminiumRegion, setAluminiumRegion] = useState(defaultSampleCar.footprintEstimator.aluminiumRegion)
-    const [totalMassSteelKg, setTotalMassSteelKg] = useState(defaultSampleCar.footprintEstimator.totalMassSteelKg)
-    const [steelCountry, setSteelCountry] = useState(defaultSampleCar.footprintEstimator.steelCountry)
+    const [totalMassFerrousMetalsKg, setTotalMassFerrousMetalsKg] = useState(defaultSampleCar.footprintEstimator.totalMassFerrousMetalsKg)
+    const [ferrousMetalsCountry, setFerrousMetalsCountry] = useState(defaultSampleCar.footprintEstimator.ferrousMetalsCountry)
     const [totalMassWithoutBatteryKg, setTotalMassWithoutBatteryKg] = useState(defaultSampleCar.footprintEstimator.totalMassWithoutBatteryKg)
-    const [totalMassOtherThanSteelOrAluminiumKg, setTotalMassOtherThanSteelOrAluminiumKg] = useState(defaultSampleCar.footprintEstimator.totalMassOtherThanSteelOrAluminiumKg)
-    const [otherMetalsRegion, setOtherMetalsRegion] = useState(defaultSampleCar.footprintEstimator.otherMetalsRegion)
+    const [totalMassOtherThanFerrousMetalsOrAluminiumKg, setTotalMassOtherThanFerrousMetalsOrAluminiumKg] = useState(defaultSampleCar.footprintEstimator.totalMassOtherThanFerrousMetalsOrAluminiumKg)
+    const [otherMaterialsRegion, setOtherMaterialsRegion] = useState(defaultSampleCar.footprintEstimator.otherMaterialsRegion)
     const [massWithoutDriverKg, setMassWithoutDriverKg] = useState(defaultSampleCar.footprintEstimator.massWithoutDriverKg)
-    const [productionCountry, setProductionCountry] = useState(defaultSampleCar.footprintEstimator.productionCountry)
+    const [manufacturingCountry, setManufacturingCountry] = useState(defaultSampleCar.footprintEstimator.manufacturingCountry)
     const [batteryCapacityKWh, setBatteryCapacityKWh] = useState(defaultSampleCar.footprintEstimator.batteryCapacityKWh)
     const [batteryRegion, setBatteryRegion] = useState(defaultSampleCar.footprintEstimator.batteryRegion)
     const [chemistry, setChemistry] = useState(defaultSampleCar.footprintEstimator.chemistry)
@@ -266,16 +266,16 @@ export function Landing() {
     const footprintEstimator = new FootprintEstimator({
         totalMassAluminiumKg,
         aluminiumRegion,
-        totalMassSteelKg,
-        steelCountry,
+        totalMassFerrousMetalsKg,
+        ferrousMetalsCountry,
         totalMassWithoutBatteryKg,
-        totalMassOtherThanSteelOrAluminiumKg,
+        totalMassOtherThanFerrousMetalsOrAluminiumKg,
         massWithoutDriverKg,
-        productionCountry,
+        manufacturingCountry,
         batteryCapacityKWh,
         batteryRegion,
         chemistry,
-        otherMetalsRegion,
+        otherMaterialsRegion,
         transportationSettings,
         isLargeCar
     })
@@ -283,16 +283,16 @@ export function Landing() {
     function replaceSimulationWithSampleCar(car: SampleCar) {
         setTotalMassAluminiumKg(car.footprintEstimator.totalMassAluminiumKg)
         setAluminiumRegion(car.footprintEstimator.aluminiumRegion)
-        setTotalMassSteelKg(car.footprintEstimator.totalMassSteelKg)
-        setSteelCountry(car.footprintEstimator.steelCountry)
+        setTotalMassFerrousMetalsKg(car.footprintEstimator.totalMassFerrousMetalsKg)
+        setFerrousMetalsCountry(car.footprintEstimator.ferrousMetalsCountry)
         setTotalMassWithoutBatteryKg(car.footprintEstimator.totalMassWithoutBatteryKg)
-        setTotalMassOtherThanSteelOrAluminiumKg(car.footprintEstimator.totalMassOtherThanSteelOrAluminiumKg)
+        setTotalMassOtherThanFerrousMetalsOrAluminiumKg(car.footprintEstimator.totalMassOtherThanFerrousMetalsOrAluminiumKg)
         setMassWithoutDriverKg(car.footprintEstimator.massWithoutDriverKg)
-        setProductionCountry(car.footprintEstimator.productionCountry)
+        setManufacturingCountry(car.footprintEstimator.manufacturingCountry)
         setBatteryCapacityKWh(car.footprintEstimator.batteryCapacityKWh)
         setBatteryRegion(car.footprintEstimator.batteryRegion)
         setChemistry(car.footprintEstimator.chemistry)
-        setOtherMetalsRegion(car.footprintEstimator.otherMetalsRegion)
+        setOtherMaterialsRegion(car.footprintEstimator.otherMaterialsRegion)
         setIsLargeCar(car.footprintEstimator.isLargeCar)
         setSelectedCarName(car.name)
         setTransportationSettings(car.footprintEstimator.transportationSettings)
@@ -377,9 +377,9 @@ export function Landing() {
                                 onChange={setTotalMassWithoutBatteryKg}
                                 extra={<Select
                                     className="w-full"
-                                    value={productionCountry}
-                                    onChange={setProductionCountry}
-                                    options={Object.values(ProductionCountry).map(region => (
+                                    value={manufacturingCountry}
+                                    onChange={setManufacturingCountry}
+                                    options={Object.values(ManufacturingCountry).map(region => (
                                         { value: region, label: region }
                                     ))} />}
                             />
@@ -400,17 +400,17 @@ export function Landing() {
 
                             />
                         </Settings>
-                        <Settings label="Masse totale d'acier (kg)">
+                        <Settings label="Masse totale de métaux ferreux (kg)">
                             <SettingsSlider
                                 min={0}
                                 max={2000}
-                                value={totalMassSteelKg}
-                                onChange={setTotalMassSteelKg}
+                                value={totalMassFerrousMetalsKg}
+                                onChange={setTotalMassFerrousMetalsKg}
                                 extra={<Select
                                     className="w-full"
-                                    value={steelCountry}
-                                    onChange={setSteelCountry}
-                                    options={Object.values(SteelCountry).map(region => (
+                                    value={ferrousMetalsCountry}
+                                    onChange={setFerrousMetalsCountry}
+                                    options={Object.values(FerrousMetalsCountry).map(region => (
                                         { value: region, label: region }
                                     ))} />}
                             />
@@ -419,15 +419,15 @@ export function Landing() {
                             <SettingsSlider
                                 min={0}
                                 max={2000}
-                                value={totalMassOtherThanSteelOrAluminiumKg}
-                                onChange={setTotalMassOtherThanSteelOrAluminiumKg}
+                                value={totalMassOtherThanFerrousMetalsOrAluminiumKg}
+                                onChange={setTotalMassOtherThanFerrousMetalsOrAluminiumKg}
                                 extra={<Select
                                     className="w-full"
-                                    value={otherMetalsRegion}
-                                    onChange={setOtherMetalsRegion}
+                                    value={otherMaterialsRegion}
+                                    onChange={setOtherMaterialsRegion}
                                     options={[
-                                        OtherMetalsRegion.Europe,
-                                        OtherMetalsRegion.Others
+                                        OtherMaterialsRegion.Europe,
+                                        OtherMaterialsRegion.Others
                                     ].map(region => (
                                         { value: region, label: region }
                                     ))} />}
