@@ -4,10 +4,12 @@
 
   Le gouvernement français a annoncé vouloir valoriser via le bonus écologique l'achat de voitures électriques dont l'empreinte carbone initiale est faible, c'est à dire celles dont la production et le transport sont peu émetteurs de CO2.
 
-  Une consultation est ouverte <a href="https://www.consultations-publiques.developpement-durable.gouv.fr/projet-de-decret-relatif-au-conditionnement-de-l-a2898.html">[lien]</a> <strong>du 28/07/2023 au 25/08/2023</strong>, présentant un projet de décret et un projet d'arrêté fixant les conditions d'éligibilité au bonus écologique des voitures électriques. L'empreinte carbone y est transformée en un score environnemental dont la valeur doit atteindre au moins 60 pour que l'acheteur puisse prétendre au bonus écologique.
+  Après une phase de consultation, un <a className="text-blue-600" target="_blank" rel="noreferrer" href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000048088866">décret</a> est paru le 19 septembre 2023 afin de déterminer le mécanisme d'attribution du bonus, accompagné d'un <a
+    className="text-blue-600"
+    target="_blank" rel="noreferrer" href="https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000048088891">arrêté</a> détaillant les calculs du score environnemental permettant l'obtention du bonus. L'empreinte carbone y est transformée en un score environnemental dont la valeur doit atteindre au moins 60 pour que l'acheteur puisse prétendre au bonus écologique.
   
-  Le modèle de calcul retenu, proposé par l'Ademe, est l'occasion de comprendre l'influence des nombreux paramètres de la production et du transport d'une voiture électrique sur son empreinte carbone totale.
-    
+  Le modèle de calcul retenu est l'occasion de comprendre l'influence des nombreux paramètres de la production et du transport d'une voiture électrique sur son empreinte carbone totale.
+
   C'est ce modèle que nous vous proposons d'explorer ici, à travers des exemples et une simulation entièrement personnalisable.
 
 ## Comment accéder au simulateur ?
