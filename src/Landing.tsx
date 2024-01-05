@@ -438,7 +438,7 @@ export function Landing() {
                                     ))} />}
                             />
                         </Settings>
-                        <Settings label="Capacité de la batterie (kWh">
+                        <Settings label="Capacité de la batterie (kWh)">
                             <SettingsSlider
                                 className="flex-grow"
                                 min={0}
