@@ -365,6 +365,7 @@ export function Landing() {
                             <SettingsSlider
                                 min={0}
                                 max={4000}
+                                precision={3}
                                 value={massWithoutDriverKg}
                                 onChange={setMassWithoutDriverKg}
                             />
@@ -373,6 +374,7 @@ export function Landing() {
                             <SettingsSlider
                                 min={0}
                                 max={4000}
+                                precision={3}
                                 value={totalMassWithoutBatteryKg}
                                 onChange={setTotalMassWithoutBatteryKg}
                                 extra={<Select
@@ -388,6 +390,7 @@ export function Landing() {
                             <SettingsSlider
                                 min={0}
                                 max={2000}
+                                precision={3}
                                 value={totalMassAluminiumKg}
                                 onChange={setTotalMassAluminiumKg}
                                 extra={<Select
@@ -404,6 +407,7 @@ export function Landing() {
                             <SettingsSlider
                                 min={0}
                                 max={2000}
+                                precision={3}
                                 value={totalMassFerrousMetalsKg}
                                 onChange={setTotalMassFerrousMetalsKg}
                                 extra={<Select
@@ -419,6 +423,7 @@ export function Landing() {
                             <SettingsSlider
                                 min={0}
                                 max={2000}
+                                precision={3}
                                 value={totalMassOtherThanFerrousMetalsOrAluminiumKg}
                                 onChange={setTotalMassOtherThanFerrousMetalsOrAluminiumKg}
                                 extra={<Select
@@ -438,6 +443,7 @@ export function Landing() {
                                 className="flex-grow"
                                 min={0}
                                 max={120}
+                                precision={3}
                                 value={batteryCapacityKWh}
                                 onChange={setBatteryCapacityKWh}
                                 extra={<Select

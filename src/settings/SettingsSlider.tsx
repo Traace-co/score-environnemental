@@ -7,9 +7,10 @@ export function SettingsSlider(props: {
   value: number,
   className?: string,
   extra?: ReactNode,
+  precision?: number,
   onChange: (value: number) => void,
 }) {
-  const { className, min, max, value, onChange, extra } = props;
+  const { className, min, max, value, onChange, extra, precision } = props;
   return (
     <div className={`${className ?? ''} flex flex-wrap gap-1`}>
       <div className="flex-shrink">
@@ -17,6 +18,7 @@ export function SettingsSlider(props: {
           min={0}
           max={max}
           value={value}
+          precision={precision}
           onChange={value => onChange(value)}
         />
       </div>
