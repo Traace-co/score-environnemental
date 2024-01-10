@@ -46,6 +46,7 @@ interface CarProperties {
     totalMassWithoutBatteryKg: number
     totalMassOtherThanFerrousMetalsOrAluminiumKg: number
     massWithoutDriverKg: number
+    massBatteryKg: number
     batteryCapacityKWh: number
     chemistry: BatteryChemistry
     isLargeCar: boolean
@@ -63,6 +64,7 @@ export function Landing() {
         totalMassOtherThanFerrousMetalsOrAluminiumKg: 80,
         massWithoutDriverKg: 1650,
         batteryCapacityKWh: 55,
+        massBatteryKg: 550,
         chemistry: BatteryChemistry.LFP_Graphite,
         isLargeCar: true,
     }
@@ -74,6 +76,7 @@ export function Landing() {
         totalMassOtherThanFerrousMetalsOrAluminiumKg: 100,
         massWithoutDriverKg: 1900,
         batteryCapacityKWh: 70,
+        massBatteryKg: 700,
         chemistry: BatteryChemistry.NMC811_Graphite,
         isLargeCar: true,
     }
@@ -85,6 +88,7 @@ export function Landing() {
         totalMassOtherThanFerrousMetalsOrAluminiumKg: 60,
         massWithoutDriverKg: 1200,
         batteryCapacityKWh: 30,
+        massBatteryKg: 300,
         chemistry: BatteryChemistry.LFP_Graphite,
         isLargeCar: false,
     }
@@ -251,11 +255,10 @@ export function Landing() {
     const [totalMassAluminiumKg, setTotalMassAluminiumKg] = useState(defaultSampleCar.footprintEstimator.totalMassAluminiumKg)
     const [aluminiumRegion, setAluminiumRegion] = useState(defaultSampleCar.footprintEstimator.aluminiumRegion)
     const [totalMassFerrousMetalsKg, setTotalMassFerrousMetalsKg] = useState(defaultSampleCar.footprintEstimator.totalMassFerrousMetalsKg)
+    const [massBatteryKg, setMassBatteryKg] = useState(defaultSampleCar.footprintEstimator.massBatteryKg)
     const [ferrousMetalsCountry, setFerrousMetalsCountry] = useState(defaultSampleCar.footprintEstimator.ferrousMetalsCountry)
-    const [totalMassWithoutBatteryKg, setTotalMassWithoutBatteryKg] = useState(defaultSampleCar.footprintEstimator.totalMassWithoutBatteryKg)
     const [totalMassOtherThanFerrousMetalsOrAluminiumKg, setTotalMassOtherThanFerrousMetalsOrAluminiumKg] = useState(defaultSampleCar.footprintEstimator.totalMassOtherThanFerrousMetalsOrAluminiumKg)
     const [otherMaterialsRegion, setOtherMaterialsRegion] = useState(defaultSampleCar.footprintEstimator.otherMaterialsRegion)
-    const [massWithoutDriverKg, setMassWithoutDriverKg] = useState(defaultSampleCar.footprintEstimator.massWithoutDriverKg)
     const [manufacturingCountry, setManufacturingCountry] = useState(defaultSampleCar.footprintEstimator.manufacturingCountry)
     const [batteryCapacityKWh, setBatteryCapacityKWh] = useState(defaultSampleCar.footprintEstimator.batteryCapacityKWh)
     const [batteryRegion, setBatteryRegion] = useState(defaultSampleCar.footprintEstimator.batteryRegion)
@@ -263,10 +266,14 @@ export function Landing() {
     const [isLargeCar, setIsLargeCar] = useState(defaultSampleCar.footprintEstimator.isLargeCar)
     const [transportationSettings, setTransportationSettings] = useState(defaultSampleCar.footprintEstimator.transportationSettings)
 
+    const totalMassWithoutBatteryKg = totalMassAluminiumKg + totalMassFerrousMetalsKg + totalMassOtherThanFerrousMetalsOrAluminiumKg
+    const massWithoutDriverKg = totalMassWithoutBatteryKg + massBatteryKg
+
     const footprintEstimator = new FootprintEstimator({
         totalMassAluminiumKg,
         aluminiumRegion,
         totalMassFerrousMetalsKg,
+        massBatteryKg,
         ferrousMetalsCountry,
         totalMassWithoutBatteryKg,
         totalMassOtherThanFerrousMetalsOrAluminiumKg,
@@ -285,9 +292,7 @@ export function Landing() {
         setAluminiumRegion(car.footprintEstimator.aluminiumRegion)
         setTotalMassFerrousMetalsKg(car.footprintEstimator.totalMassFerrousMetalsKg)
         setFerrousMetalsCountry(car.footprintEstimator.ferrousMetalsCountry)
-        setTotalMassWithoutBatteryKg(car.footprintEstimator.totalMassWithoutBatteryKg)
         setTotalMassOtherThanFerrousMetalsOrAluminiumKg(car.footprintEstimator.totalMassOtherThanFerrousMetalsOrAluminiumKg)
-        setMassWithoutDriverKg(car.footprintEstimator.massWithoutDriverKg)
         setManufacturingCountry(car.footprintEstimator.manufacturingCountry)
         setBatteryCapacityKWh(car.footprintEstimator.batteryCapacityKWh)
         setBatteryRegion(car.footprintEstimator.batteryRegion)
@@ -347,139 +352,155 @@ export function Landing() {
                         </div>
                     </div>
 
-                    <div className="flex-grow gap-2 flex flex-col">
-                        <Settings label={("Type de véhicule"
-                        )}>
-                            <div className="flex flex-row gap-2 items-center">
-                                <Radio.Group value={isLargeCar}>
-                                    <Radio.Button value={false} onClick={() => setIsLargeCar(false)}>Citadine</Radio.Button>
-                                    <Radio.Button value={true} onClick={() => setIsLargeCar(true)}>Véhicule multi-usages</Radio.Button>
-                                </Radio.Group>
-                                <Tooltip
-                                    title="Définition d'un véhicule multi-usages : nombre de places assises supérieur ou égal à cinq, volume de coffre supérieur à deux cents litres et autonomie électrique supérieure ou égale à cent soixante-dix kilomètres">
-                                    <QuestionCircleOutlined />
-                                </Tooltip>
-                            </div>
-                        </Settings>
-                        <Settings label="Masse totale véhicule sans chauffeur (kg)">
-                            <SettingsSlider
-                                min={0}
-                                max={4000}
-                                precision={3}
-                                value={massWithoutDriverKg}
-                                onChange={setMassWithoutDriverKg}
-                            />
-                        </Settings>
-                        <Settings label="Masse totale véhicule sans batterie (kg)">
-                            <SettingsSlider
-                                min={0}
-                                max={4000}
-                                precision={3}
-                                value={totalMassWithoutBatteryKg}
-                                onChange={setTotalMassWithoutBatteryKg}
-                                extra={<Select
+                    <div className="flex-grow gap-8 flex flex-col">
+                        <SettingsSection title="Paramétrage du score">
+                            <Settings label={("Type de véhicule"
+                            )}>
+                                <div className="flex flex-row gap-2 items-center">
+                                    <Radio.Group value={isLargeCar}>
+                                        <Radio.Button value={false} onClick={() => setIsLargeCar(false)}>Citadine</Radio.Button>
+                                        <Radio.Button value={true} onClick={() => setIsLargeCar(true)}>Véhicule multi-usages</Radio.Button>
+                                    </Radio.Group>
+                                    <Tooltip
+                                        title="Définition d'un véhicule multi-usages : nombre de places assises supérieur ou égal à cinq, volume de coffre supérieur à deux cents litres et autonomie électrique supérieure ou égale à cent soixante-dix kilomètres">
+                                        <QuestionCircleOutlined />
+                                    </Tooltip>
+                                </div>
+                            </Settings>
+                        </SettingsSection>
+                        <SettingsSection title="Métaux et autres matériaux">
+                            <Settings label="Masse totale d'aluminium">
+                                <SettingsSlider
+                                    min={0}
+                                    max={2000}
+                                    precision={3}
+                                    value={totalMassAluminiumKg}
+                                    onChange={setTotalMassAluminiumKg}
+                                    addonAfter="kg"
+                                    extra={<Select
+                                        dropdownMatchSelectWidth={false}
+                                        className="w-full"
+                                        value={aluminiumRegion}
+                                        onChange={setAluminiumRegion}
+                                        options={Object.values(AluminiumRegion).map(region => (
+                                            { value: region, label: region }
+                                        ))} />}
+
+                                />
+                            </Settings>
+                            <Settings label="Masse totale de métaux ferreux">
+                                <SettingsSlider
+                                    min={0}
+                                    max={2000}
+                                    precision={3}
+                                    value={totalMassFerrousMetalsKg}
+                                    onChange={setTotalMassFerrousMetalsKg}
+                                    addonAfter="kg"
+                                    extra={<Select
+                                        dropdownMatchSelectWidth={false}
+                                        className="w-full"
+                                        value={ferrousMetalsCountry}
+                                        onChange={setFerrousMetalsCountry}
+                                        options={Object.values(FerrousMetalsCountry).map(region => (
+                                            { value: region, label: region }
+                                        ))} />}
+                                />
+                            </Settings>
+                            <Settings label="Masse totale d'autres matériaux">
+                                <SettingsSlider
+                                    min={0}
+                                    max={2000}
+                                    precision={3}
+                                    value={totalMassOtherThanFerrousMetalsOrAluminiumKg}
+                                    onChange={setTotalMassOtherThanFerrousMetalsOrAluminiumKg}
+                                    addonAfter="kg"
+                                    extra={<Select
+                                        dropdownMatchSelectWidth={false}
+                                        className="w-full"
+                                        value={otherMaterialsRegion}
+                                        onChange={setOtherMaterialsRegion}
+                                        options={[
+                                            OtherMaterialsRegion.Europe,
+                                            OtherMaterialsRegion.Others
+                                        ].map(region => (
+                                            { value: region, label: region }
+                                        ))} />}
+                                />
+                            </Settings>
+                        </SettingsSection>
+                        <SettingsSection title="Transformations intermédiaires et assemblage">
+                            <Settings label="Région">
+                                <Select
+                                    dropdownMatchSelectWidth={false}
+                                    showSearch
                                     className="w-full"
                                     value={manufacturingCountry}
                                     onChange={setManufacturingCountry}
                                     options={Object.values(ManufacturingCountry).map(region => (
                                         { value: region, label: region }
-                                    ))} />}
-                            />
-                        </Settings>
-                        <Settings label="Masse totale d'aluminium (kg)">
-                            <SettingsSlider
-                                min={0}
-                                max={2000}
-                                precision={3}
-                                value={totalMassAluminiumKg}
-                                onChange={setTotalMassAluminiumKg}
-                                extra={<Select
+                                    ))} />
+                            </Settings>
+                            <Settings label="Masse totale véhicule sans batterie">
+                                <div className="text-lg text-gray-500">
+                                    {`${totalMassWithoutBatteryKg.toLocaleString()} kg`}
+                                </div>
+                            </Settings>
+                        </SettingsSection>
+                        <SettingsSection title="Batterie">
+                            <Settings label="Capacité">
+                                <SettingsSlider
+                                    className="flex-grow"
+                                    min={0}
+                                    max={120}
+                                    precision={3}
+                                    value={batteryCapacityKWh}
+                                    onChange={setBatteryCapacityKWh}
+                                    addonAfter="kWh"
+                                    extra={<Select
+                                        className="w-full"
+                                        value={batteryRegion}
+                                        onChange={setBatteryRegion}
+                                        options={[
+                                            BatteryRegion.China,
+                                            BatteryRegion.Europe,
+                                            BatteryRegion.Japan,
+                                            BatteryRegion.SouthKorea,
+                                            BatteryRegion.USA,
+                                            BatteryRegion.Other
+                                        ].map(region => (
+                                            { value: region, label: region }
+                                        ))} />}
+                                />
+                            </Settings>
+                            <Settings label="Chimie">
+                                <Select
                                     className="w-full"
-                                    value={aluminiumRegion}
-                                    onChange={setAluminiumRegion}
-                                    options={Object.values(AluminiumRegion).map(region => (
-                                        { value: region, label: region }
-                                    ))} />}
-
-                            />
-                        </Settings>
-                        <Settings label="Masse totale de métaux ferreux (kg)">
-                            <SettingsSlider
-                                min={0}
-                                max={2000}
-                                precision={3}
-                                value={totalMassFerrousMetalsKg}
-                                onChange={setTotalMassFerrousMetalsKg}
-                                extra={<Select
-                                    className="w-full"
-                                    value={ferrousMetalsCountry}
-                                    onChange={setFerrousMetalsCountry}
-                                    options={Object.values(FerrousMetalsCountry).map(region => (
-                                        { value: region, label: region }
-                                    ))} />}
-                            />
-                        </Settings>
-                        <Settings label="Masse totale d'autres métaux (kg)">
-                            <SettingsSlider
-                                min={0}
-                                max={2000}
-                                precision={3}
-                                value={totalMassOtherThanFerrousMetalsOrAluminiumKg}
-                                onChange={setTotalMassOtherThanFerrousMetalsOrAluminiumKg}
-                                extra={<Select
-                                    className="w-full"
-                                    value={otherMaterialsRegion}
-                                    onChange={setOtherMaterialsRegion}
+                                    value={chemistry}
                                     options={[
-                                        OtherMaterialsRegion.Europe,
-                                        OtherMaterialsRegion.Others
-                                    ].map(region => (
-                                        { value: region, label: region }
-                                    ))} />}
-                            />
-                        </Settings>
-                        <Settings label="Capacité de la batterie (kWh)">
-                            <SettingsSlider
-                                className="flex-grow"
-                                min={0}
-                                max={120}
-                                precision={3}
-                                value={batteryCapacityKWh}
-                                onChange={setBatteryCapacityKWh}
-                                extra={<Select
-                                    className="w-full"
-                                    value={batteryRegion}
-                                    onChange={setBatteryRegion}
-                                    options={[
-                                        BatteryRegion.China,
-                                        BatteryRegion.Europe,
-                                        BatteryRegion.Japan,
-                                        BatteryRegion.SouthKorea,
-                                        BatteryRegion.USA,
-                                        BatteryRegion.Other
-                                    ].map(region => (
-                                        { value: region, label: region }
-                                    ))} />}
-                            />
-                        </Settings>
-                        <Settings label="Chimie de la batterie">
-                            <Select
-                                className="w-full"
-                                value={chemistry}
-                                options={[
-                                    BatteryChemistry.LFP_Graphite,
-                                    BatteryChemistry.NCA_Graphite,
-                                    BatteryChemistry.NMC111_Graphite,
-                                    BatteryChemistry.NMC532_Graphite,
-                                    BatteryChemistry.NMC622_Graphite,
-                                    BatteryChemistry.NMC811_Graphite,
-                                    BatteryChemistry.Other_Chemistry
-                                ].map(chemistry => (
-                                    { value: chemistry, label: batteryChemistryName(chemistry) }
-                                ))}
-                                onChange={setChemistry} />
-                        </Settings>
-                        <Settings label="Modes de transport (non éditable)">
+                                        BatteryChemistry.LFP_Graphite,
+                                        BatteryChemistry.NCA_Graphite,
+                                        BatteryChemistry.NMC111_Graphite,
+                                        BatteryChemistry.NMC532_Graphite,
+                                        BatteryChemistry.NMC622_Graphite,
+                                        BatteryChemistry.NMC811_Graphite,
+                                        BatteryChemistry.Other_Chemistry
+                                    ].map(chemistry => (
+                                        { value: chemistry, label: batteryChemistryName(chemistry) }
+                                    ))}
+                                    onChange={setChemistry} />
+                            </Settings>
+                            <Settings label="Masse batterie">
+                                <SettingsSlider
+                                    min={0}
+                                    max={1000}
+                                    precision={3}
+                                    value={massBatteryKg}
+                                    onChange={setMassBatteryKg}
+                                    addonAfter="kg"
+                                />
+                            </Settings>
+                        </SettingsSection>
+                        <SettingsSection title="Transport (non éditable)">
                             <div className="flex flex-col w-full">
                                 <Table
                                     showHeader={!isMobile}
@@ -511,10 +532,21 @@ export function Landing() {
                                     ]}
                                 />
                             </div>
-                        </Settings>
+                        </SettingsSection>
                     </div>
                 </div >
             </Section >
         </div >
+    )
+}
+
+function SettingsSection(props: { title: string, children: ReactNode }) {
+    return (
+        <div className="flex flex-col gap-2">
+            <h3 className="text-lg font-medium mb-4">
+                {props.title}
+            </h3>
+            {props.children}
+        </div>
     )
 }

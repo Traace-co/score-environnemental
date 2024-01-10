@@ -17,6 +17,7 @@ export class FootprintEstimator {
   totalMassAluminiumKg: number
   aluminiumRegion: AluminiumRegion
   totalMassFerrousMetalsKg: number
+  massBatteryKg: number
   ferrousMetalsCountry: FerrousMetalsCountry
   totalMassWithoutBatteryKg: number
   totalMassOtherThanFerrousMetalsOrAluminiumKg: number
@@ -33,6 +34,7 @@ export class FootprintEstimator {
     totalMassAluminiumKg: number,
     aluminiumRegion: AluminiumRegion,
     totalMassFerrousMetalsKg: number,
+    massBatteryKg: number,
     ferrousMetalsCountry: FerrousMetalsCountry,
     totalMassWithoutBatteryKg: number,
     manufacturingCountry: ManufacturingCountry,
@@ -49,6 +51,7 @@ export class FootprintEstimator {
     this.totalMassAluminiumKg = params.totalMassAluminiumKg
     this.aluminiumRegion = params.aluminiumRegion
     this.totalMassFerrousMetalsKg = params.totalMassFerrousMetalsKg
+    this.massBatteryKg = params.massBatteryKg
     this.ferrousMetalsCountry = params.ferrousMetalsCountry
     this.totalMassWithoutBatteryKg = params.totalMassWithoutBatteryKg
     this.totalMassOtherThanFerrousMetalsOrAluminiumKg = params.totalMassOtherThanFerrousMetalsOrAluminiumKg

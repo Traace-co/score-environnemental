@@ -8,9 +8,10 @@ export function SettingsSlider(props: {
   className?: string,
   extra?: ReactNode,
   precision?: number,
+  addonAfter: ReactNode,
   onChange: (value: number) => void,
 }) {
-  const { className, min, max, value, onChange, extra, precision } = props;
+  const { className, min, max, value, onChange, extra, precision, addonAfter } = props;
   return (
     <div className={`${className ?? ''} flex flex-wrap gap-1`}>
       <div className="flex-shrink">
@@ -20,6 +21,7 @@ export function SettingsSlider(props: {
           value={value}
           precision={precision}
           onChange={value => onChange(value)}
+          addonAfter={addonAfter}
         />
       </div>
       <div className="flex-grow" style={{ minWidth: '100px' }}>
