@@ -406,7 +406,7 @@ export function Landing() {
                                         ))} />}
                                 />
                             </Settings>
-                            <Settings label="Masse totale d'autres matériaux">
+                            <Settings label="Masse totale des autres matériaux">
                                 <SettingsSlider
                                     min={0}
                                     max={2000}
@@ -501,6 +501,11 @@ export function Landing() {
                             </Settings>
                         </SettingsSection>
                         <SettingsSection title="Transport (non éditable)">
+                            <Settings label="Masse hors conducteur">
+                                <div className="text-lg text-gray-500">
+                                    {`${massWithoutDriverKg.toLocaleString()} kg`}
+                                </div>
+                            </Settings>
                             <div className="flex flex-col w-full">
                                 <Table
                                     showHeader={!isMobile}
